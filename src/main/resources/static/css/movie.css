@@ -1,0 +1,61 @@
+@charset "UTF-8";
+.bg-dark{
+        height: 1000px;
+        padding-top:55px;
+        padding-bottom:75px;
+        color: white;
+}
+/* 입력창 */
+.container.py-4{
+        margin: 0 auto;
+        width : 520px;
+}
+
+.movieinsertform{
+	text-align: center;
+	
+}
+.movieupdateform{
+	text-align: center;
+	
+}
+
+/* 줄거리 textarea */
+#inputStory{
+	height: 200px;
+}
+
+/* 영화 사진 div */
+.movieImage{
+    width:300px;
+    height:420px;
+    overflow:hidden;
+    margin:0 auto;
+}
+
+/* 영화 사진 */
+img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* 제목 */
+h1{
+    font-weight: bold;
+}
+
+.content{
+    margin-top: 2%;
+    padding: 5%;
+    background-color: #8C8CFF;
+    text-align: left;
+}
+.movieInfomation{
+    background-color: white;
+}
+.errMsg{
+    color: yellow;
+    display: none;
+    font-weight: bold;
+}

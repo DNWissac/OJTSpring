@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="/fragments/header.html :: fragment-head">
+
+<!-- signinform.js 불러오기 -->
+<script type="text/javascript" th:src="@{/js/signinform.js}"></script>
+
+<!-- 회원가입/로그인 용 css -->
+<link th:href="@{/css/sign.css}" rel="stylesheet" />
+<title>로그인</title>
+
+</head>
+<body>
+
+<section class="bg-light">
+    <div class="container py-4">
+    	<h3 style="text-align: center;">로그인</h3>
+    	
+        <div>
+            <form class="signform" action="../back/DAO/userMapper.php" method="post">
+                <div class="form-group">
+                    <label for="inputEmail" class="form-label mt-4">이메일</label>
+                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="userEmail">
+                    <div>
+                    	<span class="errMsg emailMsg"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group has-success">
+                    <label for="inputPassword" class="form-label mt-4">비밀번호</label>
+                    <input type="password" class="form-control" id="inputPassword" name="userPassword">
+                    <div>
+                    	<span class="errMsg pwdMsg"></span>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-primary btn-lg" id="signinBtn">로그인</button>
+                    <button type="button" class="btn btn-secondary" onclick="location.href='/'">
+                    	취소
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</section>
+
+
+</body>
+</html>

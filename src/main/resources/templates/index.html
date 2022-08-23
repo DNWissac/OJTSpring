@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 공통되는 html 구문 -->
+<head th:replace="/fragments/header.html :: fragment-head">
+</head>
+
+<head>
+<!-- index css, js -->
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<link th:href="@{/css/index.css}" rel="stylesheet" />
+
+<title>메인페이지</title>
+
+</head>
+<body>
+
+<div class="container">
+
+	<div th:replace="/fragments/header.html :: fragment-header"></div>
+	<!-- 페이징용 hidden -->
+	<input type="hidden" value="0" id="startPageNum">
+	<input type="hidden" value="1" id="nowPage">
+	<input type="hidden" value="0" id="nowBlock">
+	
+	<hr>
+    <table>
+    	<tr>
+    		<th>
+          		<button type="button" class="btn btn-info" id="latestList">영화 최신순 조회</button>
+          	</th>
+          	<th>
+          		<button type="button" class="btn btn-info" id="userList">사용자 조회</button>
+          	</th>
+          	<th>
+        		<button type="button" class="btn btn-success" id="movieInsertBtn">영화 등록</button>
+        	</th>
+        	<th>
+        		<button type="button" class="btn btn-danger" id="resetList">초기화</button>
+          	</th>
+    	</tr>
+    </table>
+    
+	<!-- 관리자의 경우 영화 등록 가능 -->
+    <table class="table" id="input_data">
+		<thead></thead>
+		<tbody></tbody>
+    </table>
+    <div class="pageDiv">
+		<nav aria-label="Page navigation">
+          <ul class="pagination">
+          </ul>
+    	</nav>
+        
+    </div>
+    
+    
+    
+</div>
+
+
+
+
+
+</body>
+</html>

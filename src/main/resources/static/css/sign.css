@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/* 회원가입 폼, 로그인폼 용 css */
+
+/* 섹션 크기 */
+.bg-light{
+        height: 1200px;
+        padding-top:55px;
+        padding-bottom:75px;
+}
+.flex-fill.mx-xl-5.mb-2{
+        margin: 0 auto;
+        width : 700px;
+        padding-right: 7rem;
+        padding-left: 7rem;
+}
+
+/* 입력창 */
+.container.py-4{
+        margin: 0 auto;
+        width : 503px;
+}
+/* 가입버튼 */
+.d-grid.gap-2{
+        padding-top: 30px;
+}
+/* 에러메시지 */
+.errMsg{
+        color: red;
+        display: none;
+}

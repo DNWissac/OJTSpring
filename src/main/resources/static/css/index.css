@@ -1,0 +1,27 @@
+@charset "UTF-8";
+/* index.html (css) */
+
+    #input_data{
+        width: 100%;
+        margin-top: 3%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    #input_data>th,td{
+        width: 20%;
+    }
+    img{
+        width: 100px;
+        height: 150px;
+    }
+    .pagination{
+        text-align: center;
+        display:inline-block;
+    }
+    .pageDiv{
+        text-align: center;
+    }
+    .page-item{
+        float:left;
+    }
