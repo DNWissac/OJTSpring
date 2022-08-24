@@ -1,4 +1,4 @@
-package com.ojt.moviescore.controller;
+package com.ojt.movie.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

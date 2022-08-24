@@ -1,4 +1,4 @@
-package com.ojt.moviescore.config;
+package com.ojt.movie.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

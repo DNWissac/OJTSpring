@@ -1,4 +1,4 @@
-package com.ojt.moviescore.model.dto;
+package com.ojt.movie.model.dto;
 
 
 import lombok.Getter;

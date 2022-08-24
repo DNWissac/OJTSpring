@@ -19,17 +19,19 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	runtimeOnly 'mysql:mysql-connector-java:5.1.47'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-/*	implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
-	implementation 'javax.servlet:jstl'*/
+/*	implementation 'org.springframework.boot:spring-boot-starter-security'				// 스프링 시큐리티 사용하기 위해서 추가
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'				// 뷰 단에서 현재 로그인된 사용자의 정보를 가져오기 위해서 추가*/
+	implementation 'com.google.code.gson:gson:2.9.1'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

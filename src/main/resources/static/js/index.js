@@ -4,59 +4,75 @@
 
 	$().ready(function() {
 
-		// 영화 최신순 조회 버튼 클릭 시
+		/**
+		 * 영화 최신순 조회 버튼 클릭
+		 */
 		$("#latestList").click(function () {
 
 
 			//let startNum = parseInt($("#startPageNum").val());
 
 			// 버튼을 다시 눌렀을 때 중복으로 나오지 않게 하도록 테이블 초기화
-			/*$("#input_data>thead").empty();
+			$("#input_data>thead").empty();
 			$("#input_data>tbody").empty();
-			$(".pagination").empty();*/
+			/*$(".pagination").empty();*/
 
-			let data = "연습";
-			let messageDTO = {
-				result : data
-			};
-
-			// ajax로 리스트 출력
+			/**
+			 * ajax로 리스트 출력
+			 */
 			$.ajax ({
 				type:"POST"
 				, url:"/movie/list"
-				, data:messageDTO
 				, error : function () {
 					alert('에러 발생!');
 				}
 				, success : function(data) {
-					console.log('통신결과');
-					console.log(data);
 
-					/*
 					// JSON으로 날아온 값 변환
 					let obj = JSON.parse(data);
-					// result 값(리스트)
-					let listArr = obj['result'];
-					// count 값(영화 총 개수)
-					let count = obj['movieCount'];
 					
-					$("#input_data>thead").append("<tr>");
-					$("#input_data>thead").append("<th>영화제목</th>");
-					$("#input_data>thead").append("<th>감독</th>");
-					$("#input_data>thead").append("<th>사진</th><th>개봉일</th>");
-					$("#input_data>thead").append("</tr>");
 					
-					for (var i = 0; i < listArr.length; i++){
-						
-						$("#input_data>tbody").append("<tr>");
-						$("#input_data>tbody").append("<td><a href='view/moviedetail.htmlhtml?seq="+listArr[i]['movieSeq']+"'>"+listArr[i]['movieTitle']+"</td>");
-						$("#input_data>tbody").append("<td>"+listArr[i]['movieDirector']+"</td>");
-						$("#input_data>tbody").append("<td><img src='"+listArr[i]['movieImage']+"' alt='사진 없음'></td>");
-						$("#input_data>tbody").append("<td>"+listArr[i]['openingDate']+"</td></tr>");
-					}
-					*/
+					// 만약 정상적으로 데이터 송수신이 완료되었다면
+					if (obj["status"] == 200) {
+						// result 값(리스트)
+						let movieList = obj["result"];
 
-					// paging(count, 1);
+						console.log("status : " + obj["status"]
+									+ ", msg : " + obj["msg"]
+									+ ", result : " + movieList);
+
+						// count 값(영화 총 개수)
+						// let count = obj['movieCount'];
+
+						// 테이블 위 th행 추가
+						$("#input_data>thead").append("<tr>");
+						$("#input_data>thead").append("<th>영화제목</th>");
+						$("#input_data>thead").append("<th>감독</th>");
+						$("#input_data>thead").append("<th>사진</th><th>개봉일</th>");
+						$("#input_data>thead").append("</tr>");
+
+						// 리스트 for문으로 돌면서 출력
+						for (var i = 0; i < movieList.length; i++){
+
+							$("#input_data>tbody").append("<tr>");
+							$("#input_data>tbody").append("<td><a href='view/moviedetail.htmlhtml?seq="+movieList[i]['nMovieSeq']+"'>"+movieList[i]['sMovieTitle']+"</td>");
+							$("#input_data>tbody").append("<td>"+movieList[i]['sMovieDirector']+"</td>");
+							$("#input_data>tbody").append("<td><img src='"+movieList[i]['sMovieImage']+"' alt='사진 없음'></td>");
+							$("#input_data>tbody").append("<td>"+movieList[i]['dtOpeningDate']+"</td></tr>");
+						}
+						// paging(count, 1);
+					}
+					
+					// 그게 아니라면
+					else {
+						alert(obj["status"] + " : " + obj["msg"]);
+						location.reload();
+
+						console.log("status : " + obj["status"]
+							+ ", msg : " + obj["msg"]
+							+ ", result : " + obj["result"]);
+
+					}
 
 				}
 			

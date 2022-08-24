@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html>
+<head th:replace="/fragments/header.html :: fragment-head"></head>
+
 <head>
-<meta charset="UTF-8">
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/signupform.js"></script>
+<!-- signinform.js 불러오기 -->
+<script type="text/javascript" th:src="@{/js/signupform.js}"></script>
 
 <!-- 회원가입/로그인 용 css -->
-<link rel="stylesheet" href="../css/sign.css">
+<link th:href="@{/css/sign.css}" rel="stylesheet" />
+
 <title>회원가입</title>
 
-
-<!-- 부트스트랩 css, js-->
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-
 </head>
+
 <body>
 <section class="bg-light">
     <div class="container py-4">
     	<h3 style="text-align: center;">회원가입</h3>
     	
         <div>
-            <form class="signform" action="../back/DAO/signupDAO.php" method="post">
+            <form class="signform" action="signup" method="post">
                 <div class="form-group">
                     <label for="inputEmail" class="form-label mt-4">이메일</label>
                     <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"

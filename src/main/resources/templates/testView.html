@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <!--타임리프 연습용 페이지-->
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
-    <title>타임리프 테스트</title>
+    <meta charset="UTF-8">
+    <title>list</title>
 </head>
 <body>
-    <p th:text=" ${testStr}"></p>
+<div class="container">
+    <h2>게시글 목록</h2>
+    <table class="movie_list">
+        <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th scope="col">글번호</th>
+            <th scope="col">제목</th>
+            <th scope="col">내용</th>
+            <th scope="col">감독</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="list : ${list}">
+            <th th:text="${list.getNMovieSeq()}"></th>
+            <th th:text="${list.getSMovieTitle()}"></th>
+            <th th:text="${list.getSMovieStory()}"></th>
+            <th th:text="${list.getSMovieDirector()}"></th>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
