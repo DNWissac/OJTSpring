@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
-<!-- 공통되는 html 구문 -->
-<head th:replace="/fragments/header.html :: fragment-head">
-</head>
+<!-- 공통 html -->
+<head th:replace="/fragments/header.html :: fragment-head"></head>
 
 <head>
 <!-- index css, js -->
@@ -11,8 +10,8 @@
 <link th:href="@{/css/index.css}" rel="stylesheet" />
 
 <title>메인페이지</title>
-
 </head>
+
 <body>
 
 <div class="container">

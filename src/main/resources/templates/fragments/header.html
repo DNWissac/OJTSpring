@@ -13,7 +13,7 @@
 <div th:fragment="fragment-header">
 <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index">영화평가 게시판</a>
+        <a class="navbar-brand" href="/">영화평가 게시판</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -21,14 +21,14 @@
         </div>
         <div class="signBtnDiv" style="text-align: right;">
         	<!-- 비 로그인 시 -->
-            <button type="button" class="btn btn-primary" onclick="location.href='signinform'">
+            <button type="button" class="btn btn-primary" onclick="location.href='signinform'" >
                 로그인
             </button>
             <button type="button" class="btn btn-primary" onclick="location.href='signupform'">
                 회원가입
             </button>
         	<!-- 로그인 시 -->
-            <button type="button" class="btn btn-primary" onclick="location.href='logout'">
+            <button type="button" class="btn btn-primary" onclick="location.href='user/logout'">
                 로그아웃
             </button>
         </div>

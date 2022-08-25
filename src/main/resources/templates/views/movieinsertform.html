@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="/fragments/header.html :: fragment-head">
-<meta charset="UTF-8">
+<head th:replace="/fragments/header.html :: fragment-head"></head>
+<head>
 <style type="text/css">
     .errMsg
     {
@@ -29,7 +29,7 @@
     	<h3 style="text-align: center;">영화 등록</h3>
     	
         <div>
-            <form class="movieinsertform" action="../back/Service/movieInsert.php" 
+            <form class="movieinsertform" action="movieInsert"
             method="post" onsubmit="return insertCheck();" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="inputTitle" class="form-label mt-4">영화제목</label>
@@ -72,7 +72,7 @@
                 
                 <div class="d-grid gap-2">
                     <button type="button" class="btn btn-warning" id="insertBtn">영화 등록</button>
-                    <button type="button" class="btn btn-secondary" onclick="location.href='../index.php'">
+                    <button type="button" class="btn btn-secondary" onclick="location.href='/'">
                     	취소
                     </button>
                 </div>

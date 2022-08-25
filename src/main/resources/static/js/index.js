@@ -8,30 +8,28 @@
 		 * 영화 최신순 조회 버튼 클릭
 		 */
 		$("#latestList").click(function () {
-
-
-			//let startNum = parseInt($("#startPageNum").val());
+			
+			// 페이징처리를 위해서 페이지의 시작값 저장
+			let startNum = parseInt($("#startPageNum").val());
 
 			// 버튼을 다시 눌렀을 때 중복으로 나오지 않게 하도록 테이블 초기화
 			$("#input_data>thead").empty();
 			$("#input_data>tbody").empty();
-			/*$(".pagination").empty();*/
+			$(".pagination").empty();
 
 			/**
 			 * ajax로 리스트 출력
 			 */
-			$.ajax ({
+			$.ajax({
 				type:"POST"
 				, url:"/movie/list"
 				, error : function () {
 					alert('에러 발생!');
 				}
 				, success : function(data) {
-
 					// JSON으로 날아온 값 변환
 					let obj = JSON.parse(data);
-					
-					
+
 					// 만약 정상적으로 데이터 송수신이 완료되었다면
 					if (obj["status"] == 200) {
 						// result 값(리스트)
@@ -39,10 +37,11 @@
 
 						console.log("status : " + obj["status"]
 									+ ", msg : " + obj["msg"]
-									+ ", result : " + movieList);
+									+ ", result : " + movieList
+									+ ", count : " + obj["count"]);
 
 						// count 값(영화 총 개수)
-						// let count = obj['movieCount'];
+						let count = obj["count"];
 
 						// 테이블 위 th행 추가
 						$("#input_data>thead").append("<tr>");
@@ -52,15 +51,16 @@
 						$("#input_data>thead").append("</tr>");
 
 						// 리스트 for문으로 돌면서 출력
-						for (var i = 0; i < movieList.length; i++){
+						for (var i = 0; i < movieList.length; i++) {
 
 							$("#input_data>tbody").append("<tr>");
-							$("#input_data>tbody").append("<td><a href='view/moviedetail.htmlhtml?seq="+movieList[i]['nMovieSeq']+"'>"+movieList[i]['sMovieTitle']+"</td>");
+							$("#input_data>tbody").append("<td><a href='moviedetail?seq="+movieList[i]['nMovieSeq']+"'>"+movieList[i]['sMovieTitle']+"</td>");
 							$("#input_data>tbody").append("<td>"+movieList[i]['sMovieDirector']+"</td>");
 							$("#input_data>tbody").append("<td><img src='"+movieList[i]['sMovieImage']+"' alt='사진 없음'></td>");
 							$("#input_data>tbody").append("<td>"+movieList[i]['dtOpeningDate']+"</td></tr>");
 						}
-						// paging(count, 1);
+
+						paging(count, 1);
 					}
 					
 					// 그게 아니라면
@@ -72,17 +72,14 @@
 							+ ", msg : " + obj["msg"]
 							+ ", result : " + obj["result"]);
 
-					}
+					} // if~else 문 종료
+				} // ajax:success 종료
+			}) // ajax 종료
+		}); // #latestlist click 이벤트 종료 
 
-				}
-			
-			})
-
-		});
-	});
-/*
+		/* 사용자 조회 임시로 사용 불가능하게 만듬
 		// 사용자 조회 클릭 시
-		$("#userList").click(function(){
+		$("#userList").click(function() {
 
 			let startNum = parseInt($("#startPageNum").val());
 			let endNum = parseInt($("#endPageNum").val());
@@ -98,13 +95,13 @@
 				type:"post",
 				data:{action:"list",
 					startPageNum:startNum},
-				success: function (data){
+				success: function (data) {
 
 					// JSON으로 날아온 값 변환
 					let obj = JSON.parse(data);
 
-					let listArr = obj['result'];
-					let count = obj['userCount'];
+					let listArr = obj["result"];
+					let count = obj["userCount"];
 
 					$("#input_data>thead").append("<tr>");
 					$("#input_data>thead").append("<th>이메일</th>");
@@ -114,10 +111,10 @@
 					
 					for (var i = 0; i < listArr.length; i++){
 						$("#input_data>tbody").append("<tr>");
-						$("#input_data>tbody").append("<td>"+listArr[i]['userEmail']+"</td>");
-						$("#input_data>tbody").append("<td>"+listArr[i]['userNickName']+"</td>");
+						$("#input_data>tbody").append("<td>"+listArr[i]["userEmail"]+"</td>");
+						$("#input_data>tbody").append("<td>"+listArr[i]["userNickName"]+"</td>");
 
-						if (listArr[i]['userAdmin'] == 1)
+						if (listArr[i]["userAdmin"] == 1)
 							$("#input_data>tbody").append("<td>관리자</td></tr>");
 						else
 							$("#input_data>tbody").append("<td>일반사용자</td></tr>");
@@ -132,6 +129,7 @@
 			});
 			
 		});
+		*/
 
 		// 초기화 버튼 클릭 시
 		$("#resetList").click(function(){
@@ -139,13 +137,13 @@
 			$("#input_data>tbody").empty();
 			$("#tbl>tbody").empty();
 			$(".pagination").empty();
-		});
+		}); // #resetList click 이벤트 종료
 
 		$("#movieInsertBtn").click(function(){
-			location.href="/view/movieinsertform.htmlhtml";
-		});
+			location.href="/movieinsertform";
+		}); // #movieInsertBtn click 이벤트 종료
 		
-	});
+	}); // jquery 종료
 
 	function pageMove(num, action){
 
@@ -232,6 +230,6 @@
 			$(".pagination").append("<li class='page-item'><a class='page-link' href='#' onclick='blockMove("+(nowBlock+1)+", "+action+")'>▶</a></li>");
 		}
 
-	}*/
+	}
 
 	

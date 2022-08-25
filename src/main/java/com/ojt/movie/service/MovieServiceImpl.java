@@ -18,4 +18,9 @@ public class MovieServiceImpl implements MovieService {
     public ArrayList<MovieDto> selectMovieList() throws Exception {
         return movieMapper.selectMovieList();
     }
+
+    @Override
+    public int movieCount() throws Exception {
+        return movieMapper.movieTotalCount();
+    }
 }

@@ -14,40 +14,40 @@ public interface MovieMapper {
     /**
      * 영화 등록
      * @param movieDto
-     * @return
+     * @return int
      */
     public int insertMovie(MovieDto movieDto);
 
     /**
      * 영화 상세정보 조회
      * @param movieSeq - PK
-     * @return
+     * @return MovieDto
      */
     public MovieDto selectMovieDetail(int movieSeq);
 
     /**
      * 영화 수정
      * @param movieDto
-     * @return
+     * @return int
      */
     public int updateMovie(MovieDto movieDto);
 
     /**
      * 영화 삭제
      * @param movieSeq - PK
-     * @return
+     * @return int
      */
     public int deleteMovie(int movieSeq);
 
     /**
      * 영화 목록
-     * @return
+     * @return ArrayList<MovieDto>
      */
     public ArrayList<MovieDto> selectMovieList();
 
     /**
      * 영화 총 개수
-     * @return
+     * @return int
      */
     public int movieTotalCount();
 

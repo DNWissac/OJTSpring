@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 공통 html -->
+<head th:replace="/fragments/header.html :: fragment-head"></head>
+
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 실패</title>
+</head>
+<body>
+<section class="bg-light">
+  <div class="container py-4">
+    <div style="text-align: center;">
+      <h2> 회원가입에 실패하셨습니다. </h2>
+      <a href="/signupform">회원가입 재시도</a>
+        <h4 th:text="${exception}">서버 내부 에러 발생.</h4>
+      <a href="/">메인으로</a>
+    </div>
+  </div>
+</section>
+</body>
+</html>

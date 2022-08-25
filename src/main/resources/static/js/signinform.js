@@ -11,26 +11,22 @@
 			let userPassword = $("#inputPassword").val();
 			
 			$.ajax({
-				url:"../back/mapper/userMapper.php",
+				url:"/signin",
 				type:"post",
-				data:{action:"signin", userEmail:userEmail,
-					  userPassword:userPassword},
-				error : function(){
+				data:{sUserEmail:userEmail,
+					  sUserPassword:userPassword},
+				error : function() {
 		            alert("로그인 에러");
 		        },
 		        success : function(data){
-
-					if ($.trim(data)== "OK")
-					{
+					if ($.trim(data)== "OK") {
 						alert("로그인에 성공하셨습니다.");
-						location.replace("../index.php");
+						location.replace("index");
 					}
 					else
 						alert(data);
-					
 		        }
-
-		        });
+			});
 
 			
 		});

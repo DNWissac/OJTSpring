@@ -8,20 +8,36 @@
             sUserEmail,
             sPassword,
             sNickName,
-            nUserAdmin
+            sUserAuth
         FROM
             tUserList
         WHERE
             sUserEmail = #{sUserEmail}
-        AND
-            sUserPassword = #{sUserPassword}
     </select>
 
-    <insert id="signUp">
-        SELECT
-            COUNT(*) AS COUNT
-        FROM
-            tMovieList
+    <insert id="saveUser" parameterType="com.ojt.movie.model.dto.UserDto">
+        INSERT INTO tUserList
+            (sUserEmail, sPassword, sNickName, sUserAuth)
+        VALUES
+            (#{sUserEmail}, #{sUserPassword}, #{sUserNickName}, #{sUserAuth})
     </insert>
+
+    <select id="findUserEmail" parameterType="String" resultType="int">
+        SELECT
+            COUNT(sUserEmail) AS COUNT
+        FROM
+            tUserList
+        WHERE
+            sUserEmail = #{sUserEmail}
+    </select>
+
+    <select id="findUserNickName" parameterType="String" resultType="int">
+        SELECT
+            COUNT(sNickName) AS COUNT
+        FROM
+            tUserList
+        WHERE
+            sNickName = #{sUserNickName}
+    </select>
 
 </mapper>

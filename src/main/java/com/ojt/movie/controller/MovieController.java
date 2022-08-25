@@ -25,6 +25,9 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
+    /**
+     * 생성자로 MovieService 삽입
+     */
     MovieController() {
         this.movieService = new MovieServiceImpl();
     }
@@ -52,7 +55,10 @@ public class MovieController {
         try {
             // 영화 리스트를 배열에 담기
             movieDtoList = movieService.selectMovieList();
+            int count = movieService.movieCount();
 
+            // count key에 영화 개수 삽입
+            map.put("count", count);
             // result key에 영화 리스트 삽입
             map.put("result", movieDtoList);
             // status key에 상태 코드 삽입
