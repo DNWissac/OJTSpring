@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
-<head>
-<head th:replace="/fragments/header.html :: fragment-head">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="/fragments/header.html :: fragment-head"></head>
+<head>
 <!-- moviedetail css/js -->
 <script type="text/javascript" th:src="@{/js/moviedetail.js}"></script>
 <link th:href="@{/css/moviedetail.css}" rel="stylesheet" />
@@ -11,18 +11,15 @@
 <body>
 
 <div class="container py-4">
-	<!-- 헤더 -->
-	<?php include '../header.php'; ?>
-	
-	<!-- 넘어온 영화 번호 저장 -->
-	<!--<input type="hidden" value="<?php echo $_GET['seq']?>" id="movieSeq">-->
-	
+
+	<div th:replace="/fragments/header.html :: fragment-header"></div>
+	<input type="hidden" id="movieSeq" th:value="${movieSeq}">
     <div class="content shadow-lg p-3 mb-5 bg-body rounded">
-        <div class="movieImage"></div>
-        
+        <div class="movieImage"><img th:src="${movieDto.sMovieImage}" ></div>
+
         <div class="movieInfomation">
-        	<div class="movieTitle"></div>
-        	<p class="fs-5 movieStory"></p>
+        	<div class="movieTitle" th:text="${movieDto.sMovieTitle}"></div>
+        	<p class="fs-5 movieStory" th:text="${movieDto.sMovieStory}"></p>
         	<p class="fs-3 movieScoreAvg">평점 : </p>
         	<div>
         		<button type='button' class='btn btn-warning' onclick='updateClick();'>수정</button>
@@ -32,14 +29,14 @@
     </div>
     
     <div class="movieScore">
-            /* 로그인 했을 때만 나옴 */
+            <!--로그인 했을 때만 나옴-->
             <div>
             	<p>평점
-            	<label><input type="radio" id="scoreRadio" name="scoreRadio" checked="checked" value="1">1</label>
-				<input type="radio" id="scoreRadio" name="scoreRadio" value="2">2
-				<input type="radio" id="scoreRadio" name="scoreRadio" value="3">3
-				<input type="radio" id="scoreRadio" name="scoreRadio" value="4">4
-				<input type="radio" id="scoreRadio" name="scoreRadio" value="5">5
+            	<input type="radio" id="scoreRadio1" name="scoreRadio" checked="checked" value="1">1
+				<input type="radio" id="scoreRadio2" name="scoreRadio" value="2">2
+				<input type="radio" id="scoreRadio3" name="scoreRadio" value="3">3
+				<input type="radio" id="scoreRadio4" name="scoreRadio" value="4">4
+				<input type="radio" id="scoreRadio5" name="scoreRadio" value="5">5
 				</p>
 				
         		  <textarea class="form-control" placeholder="간략한 평가 내용(최대 450자)" id="inputComment" style="height: 100px"></textarea>
@@ -47,8 +44,7 @@
         	</div>
 
         	<div class="scoreList">
-        		<p>평가는 최근 5개만 출력됩니다.</p>
-        		<table class="scoreTable table">
+        		<table class="scoreTable table-primary">
         			<thead>
         			</thead>
         			<tbody>

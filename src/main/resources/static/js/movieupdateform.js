@@ -56,62 +56,69 @@
 	$().ready(function()
 	{
 		let movieSeq = $("#movieSeq").val();
-		
-		// 기본정보 호출 ajax
-		$.ajax({
-			url:"../back/mapper/movieMapper.php",
-			type:"post",
-			data:{
-				movieSeq:movieSeq,
-				action:"search"
-				},
-			error : function(){
-	            alert("에러");
-	        },
-	        success : function(data){
-		        // JSON형식으로 수신한 데이터 처리
-	        	let obj = JSON.parse(data);
-				// result 값(리스트)
-				let detailArr = obj["result"][0];
-				$("#inputTitle").val(detailArr["movieTitle"]);
-				$("#inputDirector").val(detailArr["movieDirector"]);
-				$("#searchGenre").val(detailArr["genreId"]);
-				$("#inputStory").val(detailArr["movieStory"]);
-				// $("#inputImage").val(detailArr["movieImage"]);
-				$("#inputDate").val(detailArr["openingDate"]);
-	        }
 
-	    }); // ajax 종료
-
-		
 		// 장르 호출 ajax
 		$.ajax({
-			url:"../back/mapper/movieMapper.php",
+			url:"/movie/genreList",
 			type:"post",
-			data:{action:"genreList"},
-			error: function(data){
-				alert("에러 : " + data);
+			error: function(){
+				alert("에러 발생!");
 			},
 			success: function(data){
 				// JSON으로 날아온 값 변환
 				let obj = JSON.parse(data);
-				for (var i = 0; i < obj.length; i++){
-				$("#searchGenre").append("<option value='"+obj[i].genreId+"'>"+obj[i].genreName+"</option>");
+
+				// 정상적으로 데이터 송수신이 완료되었다면
+				if (obj["status"] == 200) {
+					let genreList = obj["result"];
+
+					// 결과값 log로 남기기
+					console.log("status : " + obj["status"]
+						+ ", msg : " + obj["msg"]
+						+ ", result : " + genreList);
+
+					// 장르 리스트를 출력
+					for (var i = 0; i < genreList.length; i++){
+						$("#searchGenre").append("<option value='"+genreList[i]["sGenreId"]+"'>"+genreList[i]["sGenreName"]+"</option>");
+					}
+
 				}
+
+				// 정상적이지 않은 status값이 온 경우
+				else {
+					alert(obj["status"] + " : " + obj["msg"]);
+
+					console.log("status : " + obj["status"]
+						+ ", msg : " + obj["msg"]
+						+ ", result : " + obj["result"]);
+				}
+
 			}
-		}); // 장르 호출 ajax 종료
+		});
 
 		// 영화 수정 버튼 클릭
 		$("#updateBtn").click(function(){
 
 			let title = $("#inputTitle").val();
 			let story = $("#inputStory").val();
+			let image = $("#inputImage")[0].files[0];
 			let date = $("#inputDate").val();
 			let director = $("#inputDirector").val();
 			let genre = $("#searchGenre").val();
-			
+
+			let formData = new FormData();
+
+			//이미지를 이동시키기 위한 폼데이터
+			formData.append("sMovieTitle", title);
+			formData.append("sMovieStory", story);
+			formData.append("imageFile", image);
+			formData.append("dtOpeningDate", date);
+			formData.append("sMovieDirector", director);
+			formData.append("sMovieGenreName", genre);
+			formData.append("nMovieSeq", movieSeq);
+
 			$(".errMsg").css("display", "none");
-			
+
 			if (title == "" || title == null)
 			{
 				$("#inputTitle").focus();
@@ -139,28 +146,30 @@
 
 			// 영화 수정 ajax
 			$.ajax({
-				url:"../back/mapper/movieMapper.php",
+				url:"/movie/update",
 				type:"post",
-	            data:{
-	            		action:"update", 
-	            	  	movieTitle:title,
-	                    movieStory:story,
-	                    openingDate:date,
-	                    movieDirector:director,
-	                    movieGenre:genre,
-	                    movieSeq:movieSeq
-	            },
+				data:formData,
+				contentType: false,
+				processData: false,
 				error : function(data){
-		            alert("영화 등록 에러: " + data);
+		            alert("영화 수정 에러 발생");
 		        },
 		        success : function(data){
-					if ($.trim(data)== "OK"){
-						alert("영화 수정 성공!");
-						location.replace("../index.php");
+					// JSON형식으로 수신한 데이터 처리
+					let obj = JSON.parse(data);
+
+					if (obj["status"] == 400) {
+						alert(obj["msg"]);
+					} else if (obj["status"] == 500) {
+						alert(obj["msg"]);
+						console.log("status : " + obj["status"] + ", Exception : " + obj["exception"]);
+					} else if (obj["status"] == 200) {
+						alert(obj["msg"]);
+						location.href="/";
+					} else {
+						alert("알 수 없는 오류 발생");
 					}
-					else
-						alert(data);
-		        }
+				}
 		    }); //영화 수정 ajax 종료
 		}); // 영화 버튼 클릭 function 종료
 	});

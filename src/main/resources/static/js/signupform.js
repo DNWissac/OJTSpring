@@ -3,6 +3,10 @@
  */
 
 	$().ready(function() {
+
+		// 회원가입 실패시
+		let exception = $("#exception").val();
+
 		// 프론트 유효성 검사
 		$("#signupBtn").click(function() {
 			$(".errMsg").css("display", "none");

@@ -21,14 +21,14 @@
         </div>
         <div class="signBtnDiv" style="text-align: right;">
         	<!-- 비 로그인 시 -->
-            <button type="button" class="btn btn-primary" onclick="location.href='signinform'" >
+            <button th:if="${session.sUserEmail == null}" type="button" class="btn btn-primary" onclick="location.href='signinform'" >
                 로그인
             </button>
-            <button type="button" class="btn btn-primary" onclick="location.href='signupform'">
+            <button th:if="${session.sUserEmail == null}" type="button" class="btn btn-primary" onclick="location.href='signupform'">
                 회원가입
             </button>
         	<!-- 로그인 시 -->
-            <button type="button" class="btn btn-primary" onclick="location.href='user/logout'">
+            <button th:if="${session.sUserEmail != null}" type="button" class="btn btn-primary" onclick="location.href='/user/logout'">
                 로그아웃
             </button>
         </div>

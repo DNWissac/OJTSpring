@@ -17,6 +17,7 @@
     <div class="container py-4">
     	<h3 style="text-align: center;">로그인</h3>
         <div>
+            <input type="hidden" th:value="${errMsg}" id="errMsg">
             <form class="signform" action="/user/signin" method="post">
                 <div class="form-group">
                     <label for="sUserEmail" class="form-label mt-4">이메일</label>

@@ -3,11 +3,11 @@
 
 <mapper namespace="com.ojt.movie.mapper.UserMapper">
 
-    <select id="signIn" resultType="com.ojt.movie.model.dto.UserDto">
+    <select id="signIn" parameterType="String" resultType="com.ojt.movie.model.dto.UserDto">
         SELECT
             sUserEmail,
-            sPassword,
-            sNickName,
+            sUserPassword,
+            sUserNickName,
             sUserAuth
         FROM
             tUserList
@@ -17,7 +17,7 @@
 
     <insert id="saveUser" parameterType="com.ojt.movie.model.dto.UserDto">
         INSERT INTO tUserList
-            (sUserEmail, sPassword, sNickName, sUserAuth)
+            (sUserEmail, sUserPassword, sUserNickName, sUserAuth)
         VALUES
             (#{sUserEmail}, #{sUserPassword}, #{sUserNickName}, #{sUserAuth})
     </insert>
@@ -33,11 +33,11 @@
 
     <select id="findUserNickName" parameterType="String" resultType="int">
         SELECT
-            COUNT(sNickName) AS COUNT
+            COUNT(sUserNickName) AS COUNT
         FROM
             tUserList
         WHERE
-            sNickName = #{sUserNickName}
+            sUserNickName = #{sUserNickName}
     </select>
 
 </mapper>

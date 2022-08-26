@@ -1,5 +1,6 @@
 package com.ojt.movie.mapper;
 
+import com.ojt.movie.model.dto.GenreDto;
 import com.ojt.movie.model.dto.MovieDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -23,7 +24,7 @@ public interface MovieMapper {
      * @param movieSeq - PK
      * @return MovieDto
      */
-    public MovieDto selectMovieDetail(int movieSeq);
+    public MovieDto selectMovieSearch(int movieSeq);
 
     /**
      * 영화 수정
@@ -43,13 +44,20 @@ public interface MovieMapper {
      * 영화 목록
      * @return ArrayList<MovieDto>
      */
-    public ArrayList<MovieDto> selectMovieList();
+    public ArrayList<MovieDto> selectMovieList(int startNum);
 
     /**
      * 영화 총 개수
      * @return int
      */
     public int movieTotalCount();
+
+    /**
+     * 장르 리스트 출력
+     * @return
+     */
+    public ArrayList<GenreDto> genreList();
+
 
 
 }

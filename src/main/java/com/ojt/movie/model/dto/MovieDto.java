@@ -3,6 +3,7 @@ package com.ojt.movie.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -15,7 +16,9 @@ public class MovieDto {
     private String dtOpeningDate;           // 영화 개봉일자
     private String dtMovieDate;             // 영화 등록일자
     private String sMovieDirector;          // 영화 감독 이름
-    private String sGenreID;                // 영화 장르 ID (FK)
+    private String sGenreId;                // 영화 장르 ID (FK)
+    private String sGenreName;              // 영화 장르 이름 (ID 찾기용)
+    private MultipartFile imageFile;        // 영화 사진 파일
 
 
 }

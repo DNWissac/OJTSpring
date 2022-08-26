@@ -14,7 +14,7 @@ public class MovieMapperTest {
 
     @Test
     void movieList() {
-         ArrayList<MovieDto> movieArrayList = movieMapper.selectMovieList();
+         ArrayList<MovieDto> movieArrayList = movieMapper.selectMovieList(1);
     }
 
 }

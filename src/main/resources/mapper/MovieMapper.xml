@@ -3,7 +3,7 @@
 
 <mapper namespace="com.ojt.movie.mapper.MovieMapper">
 
-    <select id="selectMovieList" resultType="com.ojt.movie.model.dto.MovieDto">
+    <select id="selectMovieList" parameterType="int" resultType="com.ojt.movie.model.dto.MovieDto">
         SELECT
             nMovieSeq,
             sMovieTitle,
@@ -15,7 +15,7 @@
             tMovieList
         ORDER BY
             dtOpeningDate DESC
-        LIMIT 0, 10
+        LIMIT #{startNum}, 10
     </select>
 
     <select id="movieTotalCount" resultType="int">
@@ -24,4 +24,67 @@
         FROM
             tMovieList
     </select>
+
+    <select id="genreList" resultType="com.ojt.movie.model.dto.GenreDto">
+        SELECT
+            sGenreId,
+            sGenreName
+        FROM
+            tMovieGenre
+    </select>
+
+    <insert id="insertMovie" parameterType="com.ojt.movie.model.dto.MovieDto">
+        INSERT INTO
+            tMovieList (
+                sMovieTitle,
+                sMovieStory,
+                sMovieImage,
+                dtOpeningDate,
+                sMovieDirector,
+                sGenreId
+            )
+        VALUES (
+                #{sMovieTitle},
+                #{sMovieStory},
+                #{sMovieImage},
+                #{dtOpeningDate},
+                #{sMovieDirector},
+                #{sGenreId}
+        )
+    </insert>
+
+    <select id="selectMovieSearch" resultType="com.ojt.movie.model.dto.MovieDto">
+        SELECT
+            sMovieTitle,
+            sMovieStory,
+            sMovieImage,
+            dtOpeningDate,
+            sMovieDirector
+        FROM
+            tMovieList
+        WHERE
+            nMovieSeq = #{nMovieSeq}
+    </select>
+
+    <delete id="deleteMovie" parameterType="int">
+        DELETE FROM
+            tMovieList
+        WHERE
+            nMovieSeq = #{nMovieSeq}
+    </delete>
+
+    <update id ="updateMovie" parameterType="com.ojt.movie.model.dto.MovieDto">
+        UPDATE
+            tMovieList
+        SET
+            sMovieTitle = #{sMovieTitle},
+            sMovieStory = #{sMovieStory},
+            dtOpeningDate = #{dtOpeningDate},
+            sMovieDirector = #{sMovieDirector},
+            sGenreId = #{sGenreId}
+        WHERE
+            nMovieSeq = #{nMovieSeq}
+    </update>
+
+
 </mapper>

@@ -1,8 +1,8 @@
 package com.ojt.movie.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 메인 컨트롤러
@@ -13,13 +13,12 @@ public class MainController {
 
     @RequestMapping("/")
     public String mainView() {
-        return "index";
+        return "/index";
     }
 
-    @RequestMapping("/test")
-    public String getMessage(Model model) {
-        model.addAttribute("testStr", "타임리프 연습");
-        return "testView";
+    @RequestMapping("/index")
+    public String getMessage() {
+        return "/index";
     }
 
     /**
@@ -28,7 +27,7 @@ public class MainController {
      */
     @RequestMapping("/signupform")
     public String signupForm() {
-        return "views/signupform";
+        return "/views/signupform";
     }
 
     /**
@@ -37,7 +36,7 @@ public class MainController {
      */
     @RequestMapping("/signinform")
     public String signinForm() {
-        return "views/signinform";
+        return "/views/signinform";
     }
 
     /**
@@ -46,15 +45,7 @@ public class MainController {
      */
     @RequestMapping("/movieinsertform")
     public String movieinsertForm() {
-        return "views/movieinsertform";
+        return "/views/movieinsertform";
     }
 
-    /**
-     * 영화 수정 페이지로 이동
-     * @return String 영화 수정 페이지로 이동
-     */
-    @RequestMapping("/movieupdateform")
-    public String movieupdateForm() {
-        return "views/movieupdateform";
-    }
 }

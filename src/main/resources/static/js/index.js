@@ -23,6 +23,7 @@
 			$.ajax({
 				type:"POST"
 				, url:"/movie/list"
+				, data:{startNum : startNum}
 				, error : function () {
 					alert('에러 발생!');
 				}
@@ -44,20 +45,19 @@
 						let count = obj["count"];
 
 						// 테이블 위 th행 추가
-						$("#input_data>thead").append("<tr>");
-						$("#input_data>thead").append("<th>영화제목</th>");
-						$("#input_data>thead").append("<th>감독</th>");
-						$("#input_data>thead").append("<th>사진</th><th>개봉일</th>");
-						$("#input_data>thead").append("</tr>");
+						$("#input_data>thead").append("<tr><th>영화제목</th><th>감독</th><th>사진</th><th>개봉일</th></tr>");
 
 						// 리스트 for문으로 돌면서 출력
 						for (var i = 0; i < movieList.length; i++) {
 
-							$("#input_data>tbody").append("<tr>");
-							$("#input_data>tbody").append("<td><a href='moviedetail?seq="+movieList[i]['nMovieSeq']+"'>"+movieList[i]['sMovieTitle']+"</td>");
-							$("#input_data>tbody").append("<td>"+movieList[i]['sMovieDirector']+"</td>");
-							$("#input_data>tbody").append("<td><img src='"+movieList[i]['sMovieImage']+"' alt='사진 없음'></td>");
-							$("#input_data>tbody").append("<td>"+movieList[i]['dtOpeningDate']+"</td></tr>");
+							let tBody = "";
+							tBody += "<tr>";
+							tBody += "<td><a href='movie/moviedetail?movieSeq="+movieList[i]['nMovieSeq']+"'>"+movieList[i]['sMovieTitle']+"</td>";
+							tBody += "<td>"+movieList[i]['sMovieDirector']+"</td>"
+							tBody += "<td><img src='"+movieList[i]['sMovieImage']+"' alt='사진 없음'></td>"
+							tBody += "<td>"+movieList[i]['dtOpeningDate']+"</td></tr>"
+
+							$("#input_data>tbody").append(tBody);
 						}
 
 						paging(count, 1);

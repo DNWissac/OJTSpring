@@ -30,7 +30,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'				// 스프링 시큐리티 사용하기 위해서 추가
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'				// 뷰 단에서 현재 로그인된 사용자의 정보를 가져오기 위해서 추가
 	implementation 'com.google.code.gson:gson:2.9.1'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'			// 유효성 검사용
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'commons-io:commons-io:2.6'											// 파일 저장
+	//xss예방 - 네이버 filter
+	implementation 'com.navercorp.lucy:lucy-xss-servlet:2.0.0'
+	implementation 'com.navercorp.lucy:lucy-xss:1.6.3'
+	//StringEscapeUtils 를 사용하기 위해 commons-text 의존성 추가
+	implementation 'org.apache.commons:commons-text:1.8'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'

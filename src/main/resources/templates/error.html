@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 공통 html -->
+<head th:replace="/fragments/header.html :: fragment-head"></head>
+
+<head>
+  <meta charset="UTF-8">
+  <title>에러</title>
+</head>
+<body>
+<section class="bg-light">
+  <div class="container py-4">
+    <div style="text-align: center;">
+      <h2> 오류 발생. </h2>
+      <a href="/">메인으로</a>
+      <h4 th:text="${exception}">서버 내부 에러 발생.</h4>
+    </div>
+  </div>
+</section>
+</body>
+</html>

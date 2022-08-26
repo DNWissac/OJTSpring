@@ -28,10 +28,7 @@
     		<th>
           		<button type="button" class="btn btn-info" id="latestList">영화 최신순 조회</button>
           	</th>
-          	<th>
-          		<button type="button" class="btn btn-info" id="userList">사용자 조회</button>
-          	</th>
-          	<th>
+          	<th th:if="${session.sUserAuth == 'admin'}">
         		<button type="button" class="btn btn-success" id="movieInsertBtn">영화 등록</button>
         	</th>
         	<th>
@@ -42,7 +39,7 @@
     
 	<!-- 관리자의 경우 영화 등록 가능 -->
     <table class="table" id="input_data">
-		<thead></thead>
+		<thead class="table-secondary"></thead>
 		<tbody></tbody>
     </table>
     <div class="pageDiv">
