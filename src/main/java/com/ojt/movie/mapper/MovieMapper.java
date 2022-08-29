@@ -2,9 +2,10 @@ package com.ojt.movie.mapper;
 
 import com.ojt.movie.model.dto.GenreDto;
 import com.ojt.movie.model.dto.MovieDto;
+import com.ojt.movie.model.dto.MovieScoreDto;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 영화 Mapper
@@ -44,7 +45,7 @@ public interface MovieMapper {
      * 영화 목록
      * @return ArrayList<MovieDto>
      */
-    public ArrayList<MovieDto> selectMovieList(int startNum);
+    public List<MovieDto> selectMovieList(int startNum);
 
     /**
      * 영화 총 개수
@@ -56,8 +57,8 @@ public interface MovieMapper {
      * 장르 리스트 출력
      * @return
      */
-    public ArrayList<GenreDto> genreList();
+    public List<GenreDto> genreList();
 
-
+    public List<MovieScoreDto> movieScoreList(int nMovieSeq);
 
 }

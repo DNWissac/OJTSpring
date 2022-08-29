@@ -1,6 +1,7 @@
 package com.ojt.movie.service;
 
 import com.ojt.movie.model.dto.UserDto;
+import org.apache.ibatis.jdbc.Null;
 
 public interface UserService {
 
@@ -17,7 +18,7 @@ public interface UserService {
      * @return int
      * @throws Exception
      */
-    public UserDto signIn(String sUserEmail) throws Exception;
+    public UserDto signIn(String sUserEmail) throws NullPointerException;
 
     /**
      * 이메일 중복검사용 메서드

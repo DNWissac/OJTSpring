@@ -5,7 +5,7 @@ import com.ojt.movie.model.dto.MovieDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MovieMapperTest {
 
@@ -14,7 +14,7 @@ public class MovieMapperTest {
 
     @Test
     void movieList() {
-         ArrayList<MovieDto> movieArrayList = movieMapper.selectMovieList(1);
+         List<MovieDto> movieArrayList = movieMapper.selectMovieList(1);
     }
 
 }

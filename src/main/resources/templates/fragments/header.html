@@ -3,8 +3,8 @@
 
     <!-- 부트스트랩 css, js-->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common/jquery.min.js}"></script>
 </head>
 
 
@@ -21,10 +21,10 @@
         </div>
         <div class="signBtnDiv" style="text-align: right;">
         	<!-- 비 로그인 시 -->
-            <button th:if="${session.sUserEmail == null}" type="button" class="btn btn-primary" onclick="location.href='signinform'" >
+            <button th:if="${session.sUserEmail == null}" type="button" class="btn btn-primary" onclick="location.href='/signinform'" >
                 로그인
             </button>
-            <button th:if="${session.sUserEmail == null}" type="button" class="btn btn-primary" onclick="location.href='signupform'">
+            <button th:if="${session.sUserEmail == null}" type="button" class="btn btn-primary" onclick="location.href='/signupform'">
                 회원가입
             </button>
         	<!-- 로그인 시 -->

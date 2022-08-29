@@ -4,11 +4,11 @@
 
 	$().ready(function()
 	{
-		let errMsg = $("#errMsg").val();
-		alert(errMsg);
+		let errorMsg = $(".errMsg").val();
 
-		if (errMsg != null) {
-			alert(errMsg);
+		if (errorMsg != null) {
+			$(".errMsg").css("display" , "inline");
 		}
-		
+
 	});
+

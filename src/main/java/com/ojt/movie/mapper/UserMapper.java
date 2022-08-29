@@ -27,12 +27,6 @@ public interface UserMapper {
      * 이메일 중복검사 메서드
      * @return int
      */
-    public int findUserEmail(String sUserEmail);
-
-    /**
-     * 닉네임 중복검사 메서드
-     * @return int
-     */
-    public int findUserNickName(String sUserNickName);
+    public int findUserCheck(String sUserEmail, String sUserNickName);
 
 }

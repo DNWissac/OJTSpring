@@ -3,7 +3,9 @@ package com.ojt.movie.service;
 
 import com.ojt.movie.model.dto.GenreDto;
 import com.ojt.movie.model.dto.MovieDto;
-import java.util.ArrayList;
+import com.ojt.movie.model.dto.MovieScoreDto;
+
+import java.util.List;
 
 public interface MovieService {
 
@@ -12,14 +14,14 @@ public interface MovieService {
      * @return ArrayList<MovieDto>
      * @throws Exception
      */
-    public ArrayList<MovieDto> selectMovieList(int startNum) throws Exception;
+    public List<MovieDto> selectMovieList(int startNum) throws Exception;
 
     /**
      * 장르 목록을 가져오는 메서드
      * @return ArrayList<GenreDto>
      * @throws Exception
      */
-    public ArrayList<GenreDto> genreList() throws Exception;
+    public List<GenreDto> genreList() throws Exception;
 
     /**
      * 영화 총 개수를 가져오는 메서드
@@ -59,4 +61,11 @@ public interface MovieService {
      * @throws Exception
      */
     public int updateMovie(MovieDto movieDto) throws Exception;
+
+    /**
+     * 영화 점수 리스트
+     * @return
+     */
+    public List<MovieScoreDto> movieScoreList(int nMovieSeq);
+
 }

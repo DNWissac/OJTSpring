@@ -79,6 +79,7 @@
         SET
             sMovieTitle = #{sMovieTitle},
             sMovieStory = #{sMovieStory},
+            sMovieImage = #{sMovieImage},
             dtOpeningDate = #{dtOpeningDate},
             sMovieDirector = #{sMovieDirector},
             sGenreId = #{sGenreId}
@@ -86,5 +87,22 @@
             nMovieSeq = #{nMovieSeq}
     </update>
 
+    <select id="movieScoreList" parameterType="int" resultType="com.ojt.movie.model.dto.MovieScoreDto">
+        SELECT
+                sScoreComment,
+                nScore,
+                dtScoreDate,
+                nMovieSeq,
+                ms.sUserEmail as sUserEmail,
+                ul.sUserNickName as sUserNickName
+          FROM
+                tMovieListScore ms
+          INNER JOIN tUserList ul ON ms.sUserEmail = ul.sUserEmail
+          WHERE
+                nMovieSeq = #{nMovieSeq}
+          ORDER BY
+                dtScoreDate DESC
+          LIMIT 0, 5
+    </select>
 
 </mapper>

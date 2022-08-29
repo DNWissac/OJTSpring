@@ -21,115 +21,52 @@
 			 * ajax로 리스트 출력
 			 */
 			$.ajax({
-				type:"POST"
+				type:"GET"
 				, url:"/movie/list"
 				, data:{startNum : startNum}
-				, error : function () {
-					alert('에러 발생!');
+				, error : function (data) {
+					alert("서버 내부 에러 발생.");
+					console.log(data);
 				}
 				, success : function(data) {
 					// JSON으로 날아온 값 변환
 					let obj = JSON.parse(data);
-
 					// 만약 정상적으로 데이터 송수신이 완료되었다면
 					if (obj["status"] == 200) {
 						// result 값(리스트)
 						let movieList = obj["result"];
-
-						console.log("status : " + obj["status"]
-									+ ", msg : " + obj["msg"]
-									+ ", result : " + movieList
-									+ ", count : " + obj["count"]);
-
+						// 콘솔로 결과값 출력
+						console.log("status : ", obj["status"]);
+						console.log("msg : ", obj["msg"]);
+						console.log("result : " + movieList);
+						console.log("count : " + obj["count"]);
 						// count 값(영화 총 개수)
 						let count = obj["count"];
-
 						// 테이블 위 th행 추가
 						$("#input_data>thead").append("<tr><th>영화제목</th><th>감독</th><th>사진</th><th>개봉일</th></tr>");
-
 						// 리스트 for문으로 돌면서 출력
 						for (var i = 0; i < movieList.length; i++) {
-
 							let tBody = "";
 							tBody += "<tr>";
-							tBody += "<td><a href='movie/moviedetail?movieSeq="+movieList[i]['nMovieSeq']+"'>"+movieList[i]['sMovieTitle']+"</td>";
-							tBody += "<td>"+movieList[i]['sMovieDirector']+"</td>"
+							tBody += "<td><a href='movie/moviedetail?movieSeq="+movieList[i]['nMovieSeq']+"'>"+XSSCheck(movieList[i]['sMovieTitle'], 1)+"</td>";
+							tBody += "<td>"+XSSCheck(movieList[i]['sMovieDirector'], 1)+"</td>"
 							tBody += "<td><img src='"+movieList[i]['sMovieImage']+"' alt='사진 없음'></td>"
-							tBody += "<td>"+movieList[i]['dtOpeningDate']+"</td></tr>"
-
+							tBody += "<td>"+XSSCheck(movieList[i]['dtOpeningDate'], 1)+"</td></tr>"
 							$("#input_data>tbody").append(tBody);
 						}
-
 						paging(count, 1);
 					}
-					
 					// 그게 아니라면
 					else {
 						alert(obj["status"] + " : " + obj["msg"]);
 						location.reload();
-
-						console.log("status : " + obj["status"]
-							+ ", msg : " + obj["msg"]
-							+ ", result : " + obj["result"]);
-
+						console.log("status : ", obj["status"]);
+						console.log("msg : ", obj["msg"]);
+						console.log("result : ", obj["result"]);
 					} // if~else 문 종료
 				} // ajax:success 종료
 			}) // ajax 종료
-		}); // #latestlist click 이벤트 종료 
-
-		/* 사용자 조회 임시로 사용 불가능하게 만듬
-		// 사용자 조회 클릭 시
-		$("#userList").click(function() {
-
-			let startNum = parseInt($("#startPageNum").val());
-			let endNum = parseInt($("#endPageNum").val());
-
-			// 버튼을 다시 눌렀을 때 중복으로 나오지 않게 하도록 테이블 초기화
-			$("#input_data>thead").empty();
-			$("#input_data>tbody").empty();
-			$("#tbl>tbody").empty();
-			$(".pagination").empty();
-			
-			$.ajax({
-				url:"back/mapper/userMapper.php",
-				type:"post",
-				data:{action:"list",
-					startPageNum:startNum},
-				success: function (data) {
-
-					// JSON으로 날아온 값 변환
-					let obj = JSON.parse(data);
-
-					let listArr = obj["result"];
-					let count = obj["userCount"];
-
-					$("#input_data>thead").append("<tr>");
-					$("#input_data>thead").append("<th>이메일</th>");
-					$("#input_data>thead").append("<th>닉네임</th>");
-					$("#input_data>thead").append("<th>관리자여부</th>");
-					$("#input_data>thead").append("</tr>");
-					
-					for (var i = 0; i < listArr.length; i++){
-						$("#input_data>tbody").append("<tr>");
-						$("#input_data>tbody").append("<td>"+listArr[i]["userEmail"]+"</td>");
-						$("#input_data>tbody").append("<td>"+listArr[i]["userNickName"]+"</td>");
-
-						if (listArr[i]["userAdmin"] == 1)
-							$("#input_data>tbody").append("<td>관리자</td></tr>");
-						else
-							$("#input_data>tbody").append("<td>일반사용자</td></tr>");
-					
-					}
-
-					paging(count,2);
-					
-				}
-
-				
-			});
-			
-		});
-		*/
+		}); // #latestlist click 이벤트 종료
 
 		// 초기화 버튼 클릭 시
 		$("#resetList").click(function(){
@@ -145,6 +82,11 @@
 		
 	}); // jquery 종료
 
+	/**
+	 * 페이지 이동
+	 * @param num 바꿀 페이지 번호
+	 * @param action 어떤 리스트인지( 1: 영화 리스트, 2: 회원 리스트 )
+	 */
 	function pageMove(num, action){
 
 		// 시작숫자와 끝 숫자 변경
@@ -160,12 +102,13 @@
 		if (parseInt(action) == 1){
 			$("#latestList").trigger("click");
 		}
-		else if (parseInt(action) == 2){
-			$("#userList").trigger("click");
-		}
-		
 	}
 
+	/**
+	 * 블록 이동
+	 * @param num 바꿀 블록의 번호
+	 * @param action 어떤 리스트인지( 1: 영화 리스트, 2: 회원 리스트 )
+	 */
 	function blockMove(num, action){
 
 		// 블록 값 변경
@@ -175,61 +118,85 @@
 		// 변경된 숫자 hidden 값으로 보관
 		$("#startPageNum").val((blockNum*5)*10);
 		$("#endPageNum").val($("#startPageNum").val()+10);
+		$("#nowPage").val(blockNum * 5 + 1);
 
 		// 바뀐 값으로 호출
 		if (parseInt(action) == 1){
 			$("#latestList").trigger("click");
 		}
-		else if (parseInt(action) == 2){
-			$("#userList").trigger("click");
-		}
-		
-		
 	}
 
+	/**
+	 * 페이징 처리
+	 * @param count	게시물 총 개수
+	 * @param action 어떤 리스트인지( 1: 영화 리스트, 2: 회원 리스트 )
+	 */
 	function paging(count, action){
-		
-		// ajax로 페이징 처리하기
-		// 현재 페이지
-		let page = parseInt($("#nowPage").val());
-		
-		// 마지막 페이지 수
-		let pageNum = Math.ceil(count/10);
 
-		// 페이지 블럭 5개씩 표기
-		let block_size = 5;
+			// ajax로 페이징 처리하기
+			// 마지막 페이지 수
+			let pageNum = Math.ceil(count/10);
 
-		// 현재 블럭의 위치(디폴트 0) 
-		let block_num = parseInt($("#nowBlock").val());
+			// 페이지 블럭 5개씩 표기
+			let block_size = 5;
 
-		// 현재 블럭의 맨 처음 페이지 넘버
-		let block_start = (block_size * block_num) + 1;
-		
-		// 현재 블럭의 맨 끝 페이지 넘버 (첫 번째 블럭이라면 5)
-		let block_end = block_start + (block_size - 1);
-		let nowPage = parseInt($("#nowPage").val());
-		let nowBlock = parseInt($("#nowBlock").val());
+			// 현재 블럭의 위치(디폴트 0)
+			let block_num = parseInt($("#nowBlock").val());
 
-		if (block_num != 0)
-			$(".pagination").append("<li class='page-item'><a class='page-link' href='#' onclick='blockMove("+(nowBlock-1)+", "+action+")'>◀</a></li>");
+			// 현재 블럭의 맨 처음 페이지 넘버
+			let block_start = (block_size * block_num) + 1;
 
-		// 페이지 개수가 블럭 마지막 페이지보다 적다면
-		if (pageNum < block_end){
-			for (var i = block_start; i <= pageNum; i++){
-				$(".pagination").append("<li class='page-item'><a class='page-link' href='#' onclick='pageMove("+i+", "+action+")'>"+i+"</a></li>");
+			// 현재 블럭의 맨 끝 페이지 넘버 (첫 번째 블럭이라면 5)
+			let block_end = block_start + (block_size - 1);
+			let nowPage = parseInt($("#nowPage").val());
+			let nowBlock = parseInt($("#nowBlock").val());
+
+			// 첫 번째 블록 (1페이지 ~ 5페이지)이라면 이전 블록으로 가기가 나타나지 않도록
+			if (block_num != 0)
+				$(".pagination").append("<li class='page-item'><a class='page-link' href='#' onclick='blockMove("+(nowBlock-1)+", "+action+")'>◀</a></li>");
+
+			// 페이지 개수가 블럭 마지막 페이지보다 적다면 더 이상 나타나지 않도록
+			if (pageNum < block_end){
+				for (var i = block_start; i <= pageNum; i++){
+					if (nowPage == i) {
+						$(".pagination").append("<li class='page-item active'><a class='page-link' href='#'>"+i+"</a></li>");
+					} else {
+						$(".pagination").append("<li class='page-item'><a class='page-link' href='#' onclick='pageMove("+i+", "+action+")'>"+i+"</a></li>");
+					}
+				}
+				return;
 			}
-			return;
-		}
-		
-		else{
-			for (var i = block_start; i <= block_end; i++){
-				$(".pagination").append("<li class='page-item'><a class='page-link' href='#' onclick='pageMove("+i+", "+action+")'>"+i+"</a></li>");
+			else{
+				for (var i = block_start; i <= block_end; i++){
+					if (nowPage == i) {
+						$(".pagination").append("<li class='page-item active'><a class='page-link' href='#'>"+i+"</a></li>");
+					} else {
+						$(".pagination").append("<li class='page-item'><a class='page-link' href='#' onclick='pageMove("+i+", "+action+")'>"+i+"</a></li>");
+					}
+				}
 			}
-		}
-		if (block_end < pageNum){
-			$(".pagination").append("<li class='page-item'><a class='page-link' href='#' onclick='blockMove("+(nowBlock+1)+", "+action+")'>▶</a></li>");
+			if (block_end < pageNum){
+				$(".pagination").append("<li class='page-item'><a class='page-link' href='#' onclick='blockMove("+(nowBlock+1)+", "+action+")'>▶</a></li>");
+			}
+
 		}
 
+	/**
+	 * XSS 방지
+	 * @param str 확인할 string
+	 * @param level 적용 방식
+	 * @returns {*} 바뀌어진 string
+	 * @constructor
+	 */
+	function XSSCheck(str, level) {
+		if (level == undefined || level == 0) {
+			str = str.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g,"");
+		} else if (level != undefined && level == 1) {
+			str = str.replace(/\</g, "&lt;");
+			str = str.replace(/\>/g, "&gt;");
+		}
+		return str;
 	}
+
 
 	

@@ -22,22 +22,19 @@
             (#{sUserEmail}, #{sUserPassword}, #{sUserNickName}, #{sUserAuth})
     </insert>
 
-    <select id="findUserEmail" parameterType="String" resultType="int">
+    <select id="findUserCheck" parameterType="String" resultType="int">
         SELECT
-            COUNT(sUserEmail) AS COUNT
+            COUNT(*) AS COUNT
         FROM
             tUserList
+        <if test="sUserEmail != null">
         WHERE
             sUserEmail = #{sUserEmail}
-    </select>
-
-    <select id="findUserNickName" parameterType="String" resultType="int">
-        SELECT
-            COUNT(sUserNickName) AS COUNT
-        FROM
-            tUserList
+        </if>
+        <if test="sUserNickName != null">
         WHERE
             sUserNickName = #{sUserNickName}
+        </if>
     </select>
 
 </mapper>

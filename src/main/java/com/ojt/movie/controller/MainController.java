@@ -1,22 +1,23 @@
 package com.ojt.movie.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 메인 컨트롤러
  * 페이지 이동 등을 담당하는 컨트롤러
  */
+@RequestMapping("/")
 @Controller
 public class MainController {
 
-    @RequestMapping("/")
+    @GetMapping("")
     public String mainView() {
         return "/index";
     }
 
-    @RequestMapping("/index")
+    @GetMapping("index")
     public String getMessage() {
         return "/index";
     }
@@ -25,16 +26,16 @@ public class MainController {
      * 회원가입 페이지로 이동
      * @return String 회원가입 폼으로 이동
      */
-    @RequestMapping("/signupform")
+    @GetMapping("signupform")
     public String signupForm() {
-        return "/views/signupform";
+        return "/views/signup/signupform";
     }
 
     /**
      * 로그인 페이지로 이동
      * @return String 로그인 페이지로 이동
      */
-    @RequestMapping("/signinform")
+    @GetMapping("signinform")
     public String signinForm() {
         return "/views/signinform";
     }
@@ -43,7 +44,7 @@ public class MainController {
      * 영화 등록 페이지로 이동
      * @return String 영화 등록 페이지로 이동
      */
-    @RequestMapping("/movieinsertform")
+    @GetMapping("movieinsertform")
     public String movieinsertForm() {
         return "/views/movieinsertform";
     }

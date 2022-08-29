@@ -22,29 +22,15 @@
         	<p class="fs-5 movieStory" th:text="${movieDto.sMovieStory}"></p>
         	<p class="fs-3 movieScoreAvg">평점 : </p>
         	<div>
-        		<button type='button' class='btn btn-warning' onclick='updateClick();'>수정</button>
-    			<button type='button' class='btn btn-dark' onclick='deleteClick();' >삭제</button>
+        		<button type='button' class='btn btn-warning' th:if="${session.sUserAuth == 'admin'}" onclick='updateClick();'>수정</button>
+    			<button type='button' class='btn btn-dark' th:if="${session.sUserAuth == 'admin'}" onclick='deleteClick();' >삭제</button>
     		</div>
         </div>
     </div>
     
     <div class="movieScore">
-            <!--로그인 했을 때만 나옴-->
-            <div>
-            	<p>평점
-            	<input type="radio" id="scoreRadio1" name="scoreRadio" checked="checked" value="1">1
-				<input type="radio" id="scoreRadio2" name="scoreRadio" value="2">2
-				<input type="radio" id="scoreRadio3" name="scoreRadio" value="3">3
-				<input type="radio" id="scoreRadio4" name="scoreRadio" value="4">4
-				<input type="radio" id="scoreRadio5" name="scoreRadio" value="5">5
-				</p>
-				
-        		  <textarea class="form-control" placeholder="간략한 평가 내용(최대 450자)" id="inputComment" style="height: 100px"></textarea>
-        		<button type="button" class="btn btn-primary" id="inputScore">등록</button>
-        	</div>
-
         	<div class="scoreList">
-        		<table class="scoreTable table-primary">
+        		<table class="table" id="scoreTable">
         			<thead>
         			</thead>
         			<tbody>
