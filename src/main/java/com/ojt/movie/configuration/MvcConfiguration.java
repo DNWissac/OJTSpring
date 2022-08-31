@@ -37,7 +37,6 @@ public class MvcConfiguration implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(escapingConverter());
-
     }
 
     @Bean
