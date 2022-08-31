@@ -168,4 +168,14 @@
 		    }); //영화 수정 ajax 종료
 		}); // 영화 버튼 클릭 function 종료
 	});
+
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				$('#imageView').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
     

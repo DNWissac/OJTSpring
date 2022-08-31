@@ -95,7 +95,7 @@ public class MovieController {
         String msg, exception = "";
         try {
             // 영화 제목 길이 검사
-            if(1 > movieDto.getSMovieTitle().length() || 50 <= movieDto.getSMovieTitle().length()) {
+            if (1 > movieDto.getSMovieTitle().length() || 50 <= movieDto.getSMovieTitle().length()) {
                 status = 400;
                 msg = "영화 제목은 1 ~ 50자 입니다.";
             } else if (1 > movieDto.getSMovieStory().length() || 500 <= movieDto.getSMovieStory().length()) {
@@ -194,7 +194,6 @@ public class MovieController {
         return "/views/moviedetail" ;
     }
 
-
     /**
      * 영화 삭제 메서드
      * @param movieSeq
@@ -288,7 +287,7 @@ public class MovieController {
                     map.put("exception", "insertResult not 1");
                 } else {
                     map.put ("status", 200);
-                    map.put ("msg", "영화가 성공적으로 등록되었습니다.");
+                    map.put ("msg", "영화가 성공적으로 수정되었습니다.");
                 }
             }
         } catch (Exception e) {
@@ -320,11 +319,22 @@ public class MovieController {
         // result라는 key에 ArrayList를 넣기 위해 map 선언
         Map map = new HashMap();
         try {
-            // 영화 리스트를 배열에 담기
+            // 영화 점수 리스트를 배열에 담기
             movieScoreDtoList = movieService.movieScoreList(nMovieSeq);
-            int count = movieService.movieCount();
-            // count key에 영화 개수 삽입
-            map.put("count", count);
+            int count = movieService.movieScoreCount(nMovieSeq);
+            double sum = movieService.movieScoreSum(nMovieSeq);
+            // 영화 점수 평균 구하기
+            double avg = sum / count;
+            
+            // 영화 개수와 총점이 0이 아닐 때만 평균 출력
+            if (count != 0 && sum != 0) {
+                map.put("average", "평점 : " + avg);
+            } else {
+                map.put("average", "평점 미입력");
+            }
+
+            // count key에 영화 점수 평균 삽입
+
             // result key에 영화 리스트 삽입
             map.put("result", movieScoreDtoList);
             // status key에 상태 코드 삽입
@@ -344,4 +354,6 @@ public class MovieController {
         ResponseEntity<String> resultEntity = new ResponseEntity<String>(result, httpStatus);
         return resultEntity;
     }
+
+
 }

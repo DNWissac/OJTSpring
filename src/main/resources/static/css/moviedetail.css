@@ -22,10 +22,9 @@
      background-color: white;
  }
  .scoreList {
- 	 border: 1px solid grey;
  	 margin-top: 5%;
  }
- .movieScoreAvg {
+ #movieScoreAvg {
  	color: blue;
  }
  .movieTitle {

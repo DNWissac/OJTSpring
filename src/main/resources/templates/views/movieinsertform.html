@@ -15,7 +15,7 @@
 
 <!-- 달력출력용 jquery Datepicker css/js -->
 <script type="text/javascript" th:src="@{/js/common/jquery-ui.js}"></script>
-<link th:href="@{/css/jquery-ui.css}" rel="stylesheet" />
+<link th:href="@{/css/common/jquery-ui.css}" rel="stylesheet" />
 
 <!-- 영화 삽입/수정/삭제 용 css -->
 <link th:href="@{/css/movie.css}" rel="stylesheet" />
@@ -27,7 +27,7 @@
 <section class="bg-dark">
     <div class="container py-4">
     	<h3 style="text-align: center;">영화 등록</h3>
-    	
+
         <div>
             <form class="movieinsertform" action="movieInsert"
             method="post" onsubmit="return insertCheck();" enctype="multipart/form-data">
@@ -36,40 +36,41 @@
                     <input type="text" class="form-control" id="inputTitle" name="movieTitle">
                 </div>
                 <span class="errMsg titleMsg">제목을 입력해주세요.</span><br>
-                
+
                 <div class="form-group">
                 	<label for="inputDirector" class="form-label mt-4">감독</label>
 					<input type="text" class="form-control" id="inputDirector" name="movieDirector">
 					<span class="errMsg directorMsg">감독을 입력 해주세요.</span><br>
-									
+
 					<label for="searchGenre" class="form-label mt-4">장르</label>
 					<select id="searchGenre" name="movieGenre" class="form-select">
 					</select>
 					<span class="errMsg genreMsg">장르를 입력 해주세요.</span><br>
                 </div>
-				
+
                 <br>
                 <div class="form-group">
                 	<label for="inputStory" class="form-label mt-4">줄거리</label>
-                	<textarea class="form-control" placeholder="간략한 줄거리(500자 이내)" 
+                	<textarea class="form-control" placeholder="간략한 줄거리(500자 이내)"
                 	id="inputStory" name="movieStory"></textarea>
                 </div>
                 <span class="errMsg storyMsg">줄거리를 입력해주세요.</span><br>
-                
+
                 <div class="form-group">
                 	<label for="inputImage" class="form-label mt-4">사진</label>
-					<input type="file" class="form-control" id="inputImage" name="movieImage">
+					    <input type="file" class="form-control" id="inputImage" name="movieImage" onchange="readURL(this);">
+                    <img id="imageView">
                 </div>
                 <span class="errMsg imageMsg">사진을 넣어주세요.</span><br>
-                
+
                 <div class="form-group">
                 	<label for="inputDate" class="form-label mt-4">영화 개봉일</label>
-					<input type="text" class="form-control" id="inputDate" 
+					<input type="text" class="form-control" id="inputDate"
 					readonly="readonly" name="movieDate">
                 </div>
 				<span class="errMsg dateMsg">개봉일자를 선택해주세요.</span><br>
                 <br>
-                
+
                 <div class="d-grid gap-2">
                     <button type="button" class="btn btn-warning" id="insertBtn">영화 등록</button>
                     <button type="button" class="btn btn-secondary" onclick="location.href='/'">

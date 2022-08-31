@@ -12,5 +12,4 @@ public class MovieScoreDto {
     private String dtScoreDate;             // 평가 날짜
     private int nMovieSeq;                  // 평가 번호
     private String sUserNickName;           // 평가자 닉네임
-
 }

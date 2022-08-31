@@ -20,7 +20,7 @@
         <div class="movieInfomation">
         	<div class="movieTitle" th:text="${movieDto.sMovieTitle}"></div>
         	<p class="fs-5 movieStory" th:text="${movieDto.sMovieStory}"></p>
-        	<p class="fs-3 movieScoreAvg">평점 : </p>
+        	<p class="fs-3" id="movieScoreAvg"></p>
         	<div>
         		<button type='button' class='btn btn-warning' th:if="${session.sUserAuth == 'admin'}" onclick='updateClick();'>수정</button>
     			<button type='button' class='btn btn-dark' th:if="${session.sUserAuth == 'admin'}" onclick='deleteClick();' >삭제</button>

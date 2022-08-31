@@ -61,4 +61,8 @@ public interface MovieMapper {
 
     public List<MovieScoreDto> movieScoreList(int nMovieSeq);
 
+    public int movieScoreSum(int nMovieSeq);
+
+    public int movieScoreCount(int nMovieSeq);
+
 }

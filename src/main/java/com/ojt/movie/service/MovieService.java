@@ -68,4 +68,18 @@ public interface MovieService {
      */
     public List<MovieScoreDto> movieScoreList(int nMovieSeq);
 
+    /**
+     * 영화 점수 총합
+     * @param nMovieSeq
+     * @return
+     */
+    public int movieScoreSum(int nMovieSeq);
+
+    /**
+     * 영화 점수 갯수
+     * @param nMovieSeq
+     * @return
+     */
+    public int movieScoreCount(int nMovieSeq);
+
 }

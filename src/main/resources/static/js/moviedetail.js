@@ -26,7 +26,11 @@
 					console.log("status : ", obj["status"]);
 					console.log("msg : ", obj["msg"]);
 					console.log("result : " + movieScoreList);
-					console.log("count : " + obj["count"]);
+					console.log("average : " + obj["average"]);
+					// 영화 점수 평균
+					let movieScoreAverage = obj["average"];
+					$("#movieScoreAvg").text(movieScoreAverage);
+					// 반복문으로 리스트 뿌리기
 					for (var i = 0; i < movieScoreList.length; i++) {
 						let tbody = "";
 						tbody += "<tr>";
@@ -46,34 +50,6 @@
 				}
 	        }
 	    });// ajax 종료
-
-		/*$("#inputScore").click(function() {
-			let score = $("input[name=scoreRadio]:checked").val();
-			let comment = $("#inputComment").val();
-			
-			$.ajax({
-				url:"../back/mapper/movieMapper.php",
-				type:"post",
-	            data:{action : "scoreInsert",
-		             movieScore : score,
-		             scoreComment : comment,
-		             movieSeq : movieSeq},
-				error : function(){
-		            alert("평가 등록 에러: ");
-		        },
-		        success : function(data){
-					let jsonObj = JSON.parse(data);
-					
-					if(jsonObj["status"] != 200)
-						alert(jsonObj["msg"]);
-					else {
-						alert("평가 등록 성공!");
-						location.reload();
-					}
-		        }
-		    }); //점수 등록 ajax 종료
-		})*/
-
 	}); // $().ready(funtion()) 종료
 
 	function deleteClick() {
